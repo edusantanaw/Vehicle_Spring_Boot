@@ -16,12 +16,12 @@ public class CreateVehicle implements ICreateVehicle {
         var licensePlateAlreadyUsed =
                 this.vehicleRepository.findByLicensePlate(data.getLicensePlate());
         if(licensePlateAlreadyUsed == null) throw new Exception("Placa já esta sendo usada");
-        Vehicle vehicle = factory(data) ;
+        Vehicle vehicle = makeVehicle(data) ;
         this.vehicleRepository.save(vehicle);
         return vehicle;
     }
 
-    private Vehicle factory(CreateVehicleDto data){
+    private Vehicle makeVehicle(CreateVehicleDto data){
         return Vehicle.builder()
                 .model(data.getModel())
                 .brand(data.getBrand())
